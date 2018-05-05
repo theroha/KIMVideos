@@ -46,6 +46,6 @@ def loadDMXList(serialInput):
     return loadSerialBuffer(serialInput, DMXOPEN, DMXCLOSE)
 
 # Found Cue function
-def foundCue(lightBuffer, lightNumber, lightLevel):
-    # Searches lightBuffer
+def foundCue(DMXList, lightNumber, lightLevel):
+    # Searches DMXList
     # If lightNumber is at lightLevel: return true
