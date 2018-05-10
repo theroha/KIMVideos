@@ -42,8 +42,37 @@ def loadDMXList(serialInput):
     '''
     DMXOPEN = chr(126)
     DMXCLOSE = chr(231)
+    searching = True
     
-    return loadSerialBuffer(serialInput, DMXOPEN, DMXCLOSE)
+    while searching:
+        # Flush Input Buffer
+        serialInput.flushInput()
+        
+        # Find Opening Byte
+        opening = 0
+        while opening != DMXOPEN:
+            opening = serialInput.read()
+
+        # Read System Message: See ENTTEC DMXUSB PRO API
+        systemMessage = serialInput.read()
+
+        # Read Message Length
+        dataLen = int(serialInput.read())
+        dataLenB = int(serialInput.read())
+
+        # Read data into buffer
+        if dataLen:
+            Buffer = serialInput.read(dataLen)
+            LSB = True
+        else:
+            Buffer = serialInput.read(dataLenB)
+            LSB = False
+
+        final = serialInput.read()
+        if final == DMXCLOSE:
+            searching = False
+    
+    return Buffer
 
 # Found Cue function
 def foundCue(DMXList, lightNumber, lightLevel):
