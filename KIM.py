@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # Kansas In Miniature Movie Control
 # By Jared Strain
 # Last Edit: 04052018
@@ -13,11 +14,28 @@ Movies are loaded from
 # Import Statements
 import DMX
 from omxplayer.player import OMXPlayer
+from pathlib import Path
+from time import sleep
 
+VIDEO_PATH = #video path
 
+class video(OMXPlayer)
+    def __init__(self, videoPath):
+        OMXPlayer.__init__(self, videoPath, args=['-b']
+        sleep(0.2)
+        self.mute()
+        self.fullscreen()
+        self.pause()
+        self.hide()
+   
+    
 
 # Found Cue function
 def foundCue(DMXList, lightNumber, lightLevel):
     # Searches DMXList
     # If lightNumber is at lightLevel: return true
-    return 0
+    
+    if DMXList[lightNumber] == lightLevel:
+        return True:
+    else: return False
+    
