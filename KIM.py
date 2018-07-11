@@ -21,13 +21,18 @@ VIDEO_PATH = #video path
 
 class video(OMXPlayer)
     def __init__(self, videoPath):
-        OMXPlayer.__init__(self, videoPath, args=['-b']
+        OMXPlayer.__init__(self, videoPath, args=['-b'])
         sleep(0.2)
         self.mute()
         self.fullscreen()
         self.pause()
-        self.hide()
-   
+        self.hide_video()
+    def play(self):
+        self.show_video()
+        self.play()
+    def pause(self):
+        self.pause()
+        self.hide_video()
     
 
 # Found Cue function
