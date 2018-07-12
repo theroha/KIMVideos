@@ -18,6 +18,8 @@ from pathlib import Path
 from time import sleep
 
 VIDEO_PATH = #video path
+SERIAL_PORT = #serial port
+LIGHT = # light to search on
 
 class video(OMXPlayer)
     def __init__(self, videoPath):
@@ -44,3 +46,12 @@ def foundCue(DMXList, lightNumber, lightLevel):
         return True:
     else: return False
     
+player = video(VIDEO_PATH) # Load and hide video
+ser = DMX.serial.Serial(SERIAL_PORT) # Open serial port
+
+while not foundCue(DMX.loadDMXList(ser), LIGHT, 0): # loop until indicated light goes dark
+    
+player.play()
+while foundCue(DMX.loadDMXList(ser), LIGHT, 0): # wait for light to come back on
+    
+player.pause()
